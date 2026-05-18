@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { trackEvent } from '../utils/telemetry'
 
 export const ProjectCard = ({ project }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
@@ -20,6 +21,10 @@ export const ProjectCard = ({ project }) => {
     setTilt({ x: 0, y: 0 })
   }
 
+  const handleTrackClick = () => {
+    trackEvent('project_click', { slug: project.slug, title: project.title })
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -32,6 +37,7 @@ export const ProjectCard = ({ project }) => {
         to={`/projects/${project.slug}`} 
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onClick={handleTrackClick}
         style={{
           transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: 'transform 0.15s ease-out'
@@ -54,7 +60,7 @@ export const ProjectCard = ({ project }) => {
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <Link to={`/projects/${project.slug}`}>
+          <Link to={`/projects/${project.slug}`} onClick={handleTrackClick}>
             <h3 className="text-2xl font-serif hover:text-accent transition-colors">{project.title}</h3>
           </Link>
           <a

@@ -6,6 +6,7 @@ import { ProjectDetail } from './pages/ProjectDetail'
 import { useThemeStore } from './store/themeStore'
 import { usePortfolioStore } from './store/portfolioStore'
 import { useEffect } from 'react'
+import { trackEvent } from './utils/telemetry'
 
 function App() {
   const initTheme = useThemeStore((state) => state.initTheme)
@@ -14,6 +15,7 @@ function App() {
   useEffect(() => {
     initTheme()
     fetchPortfolioData()
+    trackEvent('visit', { path: window.location.pathname })
   }, [initTheme, fetchPortfolioData])
 
   return (

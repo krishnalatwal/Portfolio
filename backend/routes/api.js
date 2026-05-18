@@ -4,6 +4,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import Message from '../models/Message.js'
+import Telemetry from '../models/Telemetry.js'
 
 const router = express.Router()
 
@@ -68,6 +69,23 @@ router.post('/contact', async (req, res) => {
   } catch (error) {
     console.error('Error logging transmission to MongoDB:', error)
     res.status(500).json({ error: 'Failed to process message transmission' })
+  }
+})
+
+router.post('/telemetry', async (req, res) => {
+  const { eventType, eventData } = req.body
+  const userAgent = req.headers['user-agent'] || 'Unknown'
+
+  if (!eventType) {
+    return res.status(400).json({ error: 'Event type is required.' })
+  }
+
+  try {
+    const log = await Telemetry.create({ eventType, eventData, userAgent })
+    res.status(201).json({ success: true, message: 'Telemetry event logged.', data: log })
+  } catch (error) {
+    console.error('Error logging telemetry event:', error)
+    res.status(500).json({ error: 'Failed to log telemetry.' })
   }
 })
 

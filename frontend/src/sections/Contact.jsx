@@ -4,6 +4,7 @@ import { SectionTitle } from '../components/SectionTitle'
 import { usePortfolioStore } from '../store/portfolioStore'
 import { Mail, MapPin, Phone, ArrowRight, Check, AlertCircle } from 'lucide-react'
 import { useState } from 'react'
+import { trackEvent } from '../utils/telemetry'
 
 const GithubIcon = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -72,7 +73,11 @@ export const Contact = () => {
             />
             
             <div className="flex flex-col gap-8 mt-12">
-              <a href={`mailto:${profileData.contact.email}`} className="flex items-center gap-4 text-muted hover:text-accent transition-colors group">
+              <a 
+                href={`mailto:${profileData.contact.email}`} 
+                onClick={() => trackEvent('social_click', { platform: 'email', target: profileData.contact.email })}
+                className="flex items-center gap-4 text-muted hover:text-accent transition-colors group"
+              >
                 <Mail className="w-5 h-5" />
                 <span className="font-light tracking-wide">{profileData.contact.email}</span>
               </a>
@@ -87,10 +92,22 @@ export const Contact = () => {
             </div>
             
             <div className="flex items-center gap-6 mt-12">
-              <a href={profileData.contact.socials.github} target="_blank" rel="noreferrer" className="p-3 border border-border hover:border-accent hover:text-accent transition-all text-muted">
+              <a 
+                href={profileData.contact.socials.github} 
+                onClick={() => trackEvent('social_click', { platform: 'github', target: profileData.contact.socials.github })}
+                target="_blank" 
+                rel="noreferrer" 
+                className="p-3 border border-border hover:border-accent hover:text-accent transition-all text-muted"
+              >
                 <GithubIcon className="w-5 h-5" />
               </a>
-              <a href={profileData.contact.socials.linkedin} target="_blank" rel="noreferrer" className="p-3 border border-border hover:border-accent hover:text-accent transition-all text-muted">
+              <a 
+                href={profileData.contact.socials.linkedin} 
+                onClick={() => trackEvent('social_click', { platform: 'linkedin', target: profileData.contact.socials.linkedin })}
+                target="_blank" 
+                rel="noreferrer" 
+                className="p-3 border border-border hover:border-accent hover:text-accent transition-all text-muted"
+              >
                 <LinkedinIcon className="w-5 h-5" />
               </a>
             </div>
