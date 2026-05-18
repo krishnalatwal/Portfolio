@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
+import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { projectsData } from '../data/projects'
 import { Container } from '../components/Container'
 import { MangaPanel } from '../components/MangaPanel'
