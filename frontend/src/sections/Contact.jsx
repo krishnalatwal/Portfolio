@@ -28,7 +28,16 @@ export const Contact = () => {
 
     setStatus('sending')
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const getApiUrl = () => {
+        const envUrl = import.meta.env.VITE_API_URL;
+        if (envUrl) {
+          const normalized = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
+          return normalized.endsWith('/api') ? normalized : `${normalized}/api`;
+        }
+        return 'http://localhost:5000/api';
+      };
+      const apiBase = getApiUrl();
+      const response = await fetch(`${apiBase}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

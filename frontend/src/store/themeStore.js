@@ -24,7 +24,7 @@ export const useThemeStore = create(
       })
     }),
     {
-      name: 'antigravity-theme',
+      name: 'portfolio-theme',
     }
   )
 )

@@ -5,7 +5,16 @@ import { skillsData as localSkills } from '../data/skills'
 import { parseMdxFrontmatter } from '../utils/mdxParser'
 import { siteSettings } from '../data/settings'
 
-const API_BASE_URL = 'http://localhost:5000/api'
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl) {
+    const normalized = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
+    return normalized.endsWith('/api') ? normalized : `${normalized}/api`;
+  }
+  return 'http://localhost:5000/api';
+};
+
+const API_BASE_URL = getApiUrl();
 
 // Synchronously pre-load all MDX journals using Vite's native eager import loader
 const mdxModules = import.meta.glob('/src/content/devlogs/*.mdx', { query: '?raw', import: 'default', eager: true })

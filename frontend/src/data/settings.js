@@ -7,8 +7,8 @@
 
 export const siteSettings = {
   // ── Site Identity ───────────────────────────────────────
-  siteName: 'ANTIGRAVITY',
-  siteTitle: 'Antigravity | Portfolio',
+  siteName: 'PORTFOLIO',
+  siteTitle: 'Krishna Latwal | Portfolio',
   siteDescription: 'Cinematic engineering portfolio and technical journal by Krishna Latwal — Cloud & DevOps Engineer.',
   siteUrl: 'https://krishnalatwal.dev',
   siteLocale: 'en_IN',

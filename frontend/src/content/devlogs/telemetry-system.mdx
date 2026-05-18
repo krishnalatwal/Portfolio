@@ -6,7 +6,7 @@ category: "Systems"
 tags: ["MongoDB", "Telemetry", "Node.js"]
 publishedAt: "2026-05-18"
 readingTime: "8 min read"
-summary: "A breakdown of the async telemetry architecture used in ANTIGRAVITY."
+summary: "A breakdown of the async telemetry architecture used in this portfolio."
 cover: "/manga/devlogs/telemetry.jpg"
 ---
 
@@ -14,7 +14,7 @@ cover: "/manga/devlogs/telemetry.jpg"
 
 Every system should log its own heartbeat. In full-stack applications, understanding user telemetry without degrading critical user experience is a major balance.
 
-When building the ANTIGRAVITY portfolio platform, I wanted to showcase telemetry and operational logging depth. However, standard analytics tools are heavy, cookie-reliant, and block client-side UI threads.
+When building this portfolio platform, I wanted to showcase telemetry and operational logging depth. However, standard analytics tools are heavy, cookie-reliant, and block client-side UI threads.
 
 To solve this, I designed a **custom, lightweight, non-blocking telemetry system** connected directly to my MongoDB database.
 

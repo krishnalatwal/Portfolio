@@ -9,7 +9,7 @@ dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT || 5000
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/antigravity'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/portfolio'
 
 // MongoDB Connection
 mongoose.connect(MONGODB_URI)
@@ -25,7 +25,7 @@ app.use('/api', apiRoutes)
 
 // Root fallback route
 app.get('/', (req, res) => {
-  res.json({ message: 'Antigravity Portfolio API Service is Running.' })
+  res.json({ message: 'Portfolio API Service is Running.' })
 })
 
 // Start server
