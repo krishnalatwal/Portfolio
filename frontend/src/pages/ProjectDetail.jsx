@@ -69,46 +69,90 @@ export const ProjectDetail = () => {
         <div className="grid lg:grid-cols-[1fr_2fr] gap-16 md:gap-24">
           <div className="sticky top-32 h-fit">
             <div className="w-12 h-[1px] bg-border mb-8"></div>
-            <h3 className="font-serif text-2xl mb-4">Project Scope</h3>
+            <h3 className="font-serif text-2xl mb-4">Project Case Study</h3>
             <p className="text-muted font-light leading-relaxed">
-              A deep dive into the architecture, challenges, and outcomes of the <span className="text-accent">{project.title}</span> system.
+              A deep-dive investigation into the architecture, challenges, and implementation of <span className="text-accent">{project.title}</span>.
             </p>
           </div>
 
-          <div className="flex flex-col gap-16">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl font-serif mb-6">Overview</h2>
+          <div className="flex flex-col gap-20">
+            {/* Overview */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">01 / Executive Overview</h2>
               <p className="text-lg font-light leading-relaxed text-secondary/90">
                 {project.details.overview}
               </p>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl font-serif mb-6">Architecture</h2>
-              <p className="text-lg font-light leading-relaxed text-secondary/90">
+            {/* Tech Stack */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">02 / Technical Arsenal</h2>
+              <p className="text-lg font-light leading-relaxed text-secondary/90 mb-6">
+                {project.details.techStack}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="text-xs uppercase tracking-widest px-3 py-1.5 bg-panel border border-border text-muted font-mono">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Architecture */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">03 / System Architecture</h2>
+              <p className="text-lg font-light leading-relaxed text-secondary/90 mb-8">
                 {project.details.architecture}
+              </p>
+              <MangaPanel 
+                className="w-full aspect-video"
+                image={project.image}
+                text="TOPOLOGY MAP."
+              />
+            </motion.div>
+
+            {/* Implementation */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">04 / Engineering Implementation</h2>
+              <p className="text-lg font-light leading-relaxed text-secondary/90">
+                {project.details.implementation}
               </p>
             </motion.div>
 
-            <MangaPanel 
-              className="w-full aspect-video"
-              image={project.image} // We'll re-use the main image as placeholder for now
-              text="SYSTEM ARCHITECTURE."
-            />
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl font-serif mb-6">Challenges</h2>
-              <p className="text-lg font-light leading-relaxed text-secondary/90">
+            {/* Challenges */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">05 / Major Challenges Faced</h2>
+              <p className="text-lg font-light leading-relaxed text-secondary/90 font-light">
                 {project.details.challenges}
               </p>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-3xl font-serif mb-6">Outcomes</h2>
-              <p className="text-lg font-light leading-relaxed text-secondary/90">
+            {/* Outcomes */}
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <h2 className="text-3xl font-serif mb-6">06 / Outcomes & Telemetry Metrics</h2>
+              <p className="text-lg font-light leading-relaxed text-secondary/90 font-light">
                 {project.details.outcomes}
               </p>
             </motion.div>
+
+            {/* Staggered Manga Gallery */}
+            {project.details.gallery && project.details.gallery.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mt-8">
+                <h2 className="text-3xl font-serif mb-8">07 / Blueprint & Asset Frames</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {project.details.gallery.map((img, i) => (
+                    <MangaPanel
+                      key={img}
+                      className={`aspect-[4/3] ${i === 0 ? 'md:col-span-2 aspect-[21/9]' : ''}`}
+                      image={img}
+                      text={`ASSET PANEL 0${i + 1}`}
+                      delay={0.1 * i}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
 
