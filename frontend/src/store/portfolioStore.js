@@ -2,13 +2,18 @@ import { create } from 'zustand'
 import { profileData as localProfile } from '../data/profile'
 import { projectsData as localProjects } from '../data/projects'
 import { skillsData as localSkills } from '../data/skills'
+import { parseMdxFrontmatter } from '../utils/mdxParser'
 
 const API_BASE_URL = 'http://localhost:5000/api'
 
-export const usePortfolioStore = create((set) => ({
+// Synchronously pre-load all MDX journals using Vite's native eager import loader
+const mdxModules = import.meta.glob('/src/content/devlogs/*.mdx', { query: '?raw', import: 'default', eager: true })
+
+export const usePortfolioStore = create((set, get) => ({
   profile: localProfile,
   projects: localProjects,
   skills: localSkills,
+  journals: [],
   isLoading: false,
   error: null,
   
@@ -45,5 +50,23 @@ export const usePortfolioStore = create((set) => ({
         error: 'Backend offline, using fallback' 
       })
     }
+  },
+
+  loadJournals: () => {
+    const list = []
+    Object.entries(mdxModules).forEach(([filePath, rawContent]) => {
+      const metadata = parseMdxFrontmatter(rawContent)
+      if (metadata) {
+        list.push({
+          ...metadata,
+          rawContent,
+          filePath
+        })
+      }
+    })
+    
+    // Sort chronological: newest logs first
+    list.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+    set({ journals: list })
   }
 }))

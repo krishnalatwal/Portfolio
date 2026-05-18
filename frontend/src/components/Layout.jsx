@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, Link } from 'react-router-dom'
 import { ThemeToggle } from './ThemeToggle'
 import { ScrollProgress } from './ScrollProgress'
 
@@ -16,7 +16,7 @@ export const Layout = () => {
       {/* Fixed Navigation / Header */}
       <header className={`fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 lg:px-24 xl:px-32 mix-blend-difference text-white pointer-events-none transition-all duration-300`}>
         <div className="flex justify-between items-center max-w-[1440px] mx-auto w-full pointer-events-auto">
-          <a href="/" className="font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:text-accent transition-colors">K.</a>
+          <Link to="/" className="font-serif text-2xl md:text-3xl font-bold tracking-tighter hover:text-accent transition-colors">K.</Link>
           
           <nav className="hidden lg:flex gap-8 xl:gap-12 text-xs md:text-sm uppercase tracking-widest font-light">
             {isHome ? (
@@ -25,9 +25,14 @@ export const Layout = () => {
                 <a href="#skills" className="hover:text-accent transition-colors">02 Skills</a>
                 <a href="#projects" className="hover:text-accent transition-colors">03 Projects</a>
                 <a href="#contact" className="hover:text-accent transition-colors">04 Contact</a>
+                <Link to="/devlog" className="hover:text-accent transition-colors">05 Dev Logs</Link>
               </>
             ) : (
-              <a href="/#projects" className="hover:text-accent transition-colors">Back to Projects</a>
+              <>
+                <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+                <a href="/#projects" className="hover:text-accent transition-colors">Projects</a>
+                <Link to="/devlog" className={`hover:text-accent transition-colors ${location.pathname.startsWith('/devlog') ? 'font-medium text-accent' : ''}`}>Dev Logs</Link>
+              </>
             )}
           </nav>
           

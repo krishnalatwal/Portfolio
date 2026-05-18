@@ -1,0 +1,66 @@
+---
+title: "Why I Avoided Overengineering My Portfolio"
+slug: "portfolio-architecture"
+subtitle: "Designing minimalist print-manga design tokens"
+category: "Aesthetics"
+tags: ["CSS", "Three.js", "Design System"]
+publishedAt: "2026-05-17"
+readingTime: "6 min read"
+summary: "An analysis of the minimalist, print-manga editorial aesthetics used in ANTIGRAVITY."
+cover: "/manga/devlogs/portfolio.jpg"
+---
+
+# Why I Avoided Overengineering My Portfolio
+
+Modern developer portfolios are often crowded with flashy loading bars, massive 3D models that cause fans to spin, and cluttered layouts.
+
+For ANTIGRAVITY, I chose the opposite path: **Cinematic Minimalism**.
+
+Drawing inspiration from print editorial magazines and traditional hand-drawn manga layouts, the visual system focuses on typography, micro-spacing, and structured storytelling.
+
+<TransmissionQuote 
+  quote="Simplicity is the ultimate sophistication. When you remove noise, only the truth remains."
+  source="Design Philosophy Journal"
+/>
+
+---
+
+## 01 / The HSL Design Tokens
+
+Vanilla CSS with semantic custom properties provides absolute control over theme transitions. Instead of a heavy component styling framework, we utilize pure CSS variables defined in HSL (Hue, Saturation, Lightness):
+
+```css
+:root {
+  --primary-hsl: 0, 0%, 98%;
+  --secondary-hsl: 0, 0%, 7%;
+  --accent-hsl: 260, 80%, 65%;
+  --border-hsl: 0, 0%, 85%;
+  --bg: hsl(var(--primary-hsl));
+  --text: hsl(var(--secondary-hsl));
+}
+```
+
+---
+
+## 02 / The MangaPanel Component
+
+To frame visual assets premiumly, I created a reusable custom React component that replicates halftone print layouts. It features a textured paper grain overlay, strict black-and-white image desaturation, and subtle vertical typography:
+
+```javascript
+export const MangaPanel = ({ image, text, className }) => {
+  return (
+    <div className={`relative border border-border bg-panel overflow-hidden group ${className}`}>
+      <img src={image} className="w-full h-full object-cover grayscale opacity-90 transition-all group-hover:scale-105" />
+      <div className="absolute top-8 right-8 bg-bg border border-border p-4">
+        <span className="font-serif italic write-vertical-right">{text}</span>
+      </div>
+    </div>
+  )
+}
+```
+
+---
+
+## 03 / Immersive Visual Flow
+
+A clean Three.js space background is used purely as an ambient accent. By disabling expensive WebGL features like shadows and complex post-processing shaders, the site maintains standard hardware loading times while providing a premium, cosmic feel.

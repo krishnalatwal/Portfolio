@@ -1,0 +1,53 @@
+---
+title: "How I Built KrishiNetra"
+slug: "krishinetra-breakdown"
+subtitle: "AI Asynchronous Crop Diagnostics at scale"
+category: "AI"
+tags: ["TensorFlow", "FastAPI", "Python", "Android"]
+publishedAt: "2026-05-16"
+readingTime: "10 min read"
+summary: "An engineering breakdown of KrishiNetra, an AI-powered offline-first agricultural diagnostics system."
+cover: "/manga/devlogs/krishinetra.jpg"
+---
+
+# How I Built KrishiNetra
+
+In rural agricultural areas, network connectivity is highly sparse. Farmers diagnosing crop diseases need a system that functions offline-first, yet can scale asynchronously when dynamic cloud networks are found.
+
+I built **KrishiNetra** to address this exact operational friction: a TensorFlow Lite mobile application supported by an asynchronous cloud diagnostic gateway.
+
+<TransmissionQuote 
+  quote="Software is only useful when it adapts to the hardware constraints of the real world."
+  source="KrishiNetra Design Blueprint"
+/>
+
+---
+
+## 01 / Asynchronous Gateway Design
+
+Heavy convolutional neural networks (CNNs) can choke traditional synchronous thread pools. The FastAPI gateway routes uploads asynchronously to a Redis queue, freeing up worker threads immediately:
+
+```python
+@app.post("/diagnose/async")
+async def start_diagnostics(file: UploadFile = File(...)):
+    task_id = str(uuid.uuid4())
+    # Asynchronously dump file to object store and trigger celery worker
+    await upload_to_s3(file, task_id)
+    celery.send_task("tasks.diagnose_crop", args=[task_id])
+    return {"task_id": task_id, "status": "queued"}
+```
+
+---
+
+## 02 / Mobile Edge Diagnostics
+
+To allow farmers to run crop diagnostics instantly without any network connection, we converted our custom-trained ResNet-50 model to an optimized TensorFlow Lite format:
+
+- **Quantization**: 8-bit integer post-training quantization reduced the model size from 98MB to 24MB.
+- **Latency**: Diagnostic latency fell from 1.8 seconds on CPU to under 120ms on mobile NPU threads.
+
+---
+
+## 03 / Engineering Impact
+
+By keeping edge inferencing local and offloading deep diagnostics asynchronously to an elastic, serverless cloud gateway, KrishiNetra delivers crop diagnostics at zero operational cost when offline, and processes cloud analytics at scale when connected.

@@ -1,0 +1,76 @@
+---
+title: "How My Telemetry System Works"
+slug: "telemetry-system"
+subtitle: "Designing lightweight async analytics pipelines"
+category: "Systems"
+tags: ["MongoDB", "Telemetry", "Node.js"]
+publishedAt: "2026-05-18"
+readingTime: "8 min read"
+summary: "A breakdown of the async telemetry architecture used in ANTIGRAVITY."
+cover: "/manga/devlogs/telemetry.jpg"
+---
+
+# How My Telemetry System Works
+
+Every system should log its own heartbeat. In full-stack applications, understanding user telemetry without degrading critical user experience is a major balance.
+
+When building the ANTIGRAVITY portfolio platform, I wanted to showcase telemetry and operational logging depth. However, standard analytics tools are heavy, cookie-reliant, and block client-side UI threads.
+
+To solve this, I designed a **custom, lightweight, non-blocking telemetry system** connected directly to my MongoDB database.
+
+<TransmissionQuote 
+  quote="Observability is not about looking at the systems you built. It is about understanding the systems as they run in real time."
+  source="Systems Engineering Field Note #102"
+/>
+
+---
+
+## 01 / The Async Event Pipeline
+
+To ensure the user interface remains at a locked **60 FPS** during navigations, theme toggles, and project views, the telemetry tracker uses a fire-and-forget asynchronous pattern.
+
+Instead of blocking the rendering thread while waiting for a backend confirmation, we fire a non-blocking `fetch` request inside a promise:
+
+```javascript
+export const trackEvent = async (eventType, eventData = {}) => {
+  try {
+    fetch('http://localhost:5000/api/telemetry', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ eventType, eventData })
+    }).catch(err => {
+      console.debug('Telemetry offline:', err.message)
+    })
+  } catch (error) {
+    console.debug('Telemetry skipped:', error.message)
+  }
+}
+```
+
+---
+
+## 02 / The Database Schema
+
+On the backend, events are streamed to an optimized MongoDB collection. The schema balances structure with flexibility, using Mongoose's `Mixed` type for the event payload to accommodate different interaction types:
+
+```javascript
+const telemetrySchema = new mongoose.Schema({
+  eventType: { type: String, required: true },
+  eventData: { type: mongoose.Schema.Types.Mixed, default: {} },
+  userAgent: { type: String, default: 'Unknown' },
+  timestamp: { type: Date, default: Date.now }
+})
+```
+
+---
+
+## 03 / Insights & Telemetry Depth
+
+By capturing key interaction telemetry:
+- **Theme Toggles**: Insights into whether visitors prefer Dark or Light modes.
+- **Project Clicks**: Telemetry mapping showing case study popularity.
+- **Social Connection Clicks**: Real-time click funneling to GitHub and LinkedIn.
+
+This approach demonstrates operational rigor, showing that full-stack systems engineering extends all the way to user experience observability.
