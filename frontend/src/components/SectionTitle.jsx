@@ -7,7 +7,7 @@ export const SectionTitle = ({ chapter, title, subtitle, className }) => {
         <span className="text-sm tracking-[0.2em] text-muted">{chapter}</span>
         <div className="h-[1px] w-12 bg-border"></div>
       </div>
-      <h2 className="text-5xl md:text-7xl font-serif font-light tracking-tight mb-6">
+      <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light tracking-tight mb-6">
         {title}
       </h2>
       {subtitle && (

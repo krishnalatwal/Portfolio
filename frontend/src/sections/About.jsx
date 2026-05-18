@@ -34,7 +34,7 @@ export const About = () => {
           {/* Manga Inspired Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 grid-flow-row-dense">
             <MangaPanel 
-              className="md:col-span-2 aspect-[21/9]"
+              className="md:col-span-2 aspect-[16/9] md:aspect-[21/9]"
               image="/manga/about-city.jpg"
               text="EVERY PROJECT BEGINS WITH A PROBLEM."
               delay={0.1}

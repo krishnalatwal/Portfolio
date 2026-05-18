@@ -40,7 +40,7 @@ export const Hero = () => {
             </span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-serif font-light leading-tight tracking-tighter">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-light leading-tight tracking-tighter">
             Hi, I'm <br />
             <span className="italic text-accent">{profileData.name}</span>
           </h1>
