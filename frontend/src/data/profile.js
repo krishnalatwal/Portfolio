@@ -1,17 +1,17 @@
 export const profileData = {
   name: 'Krishna.',
-  title: 'FULL STACK DEVELOPER',
-  description: 'I build digital experiences that solve real-world problems with clean code.',
+  title: 'CLOUD & DEVOPS ENGINEER',
+  description: 'I architect scalable cloud infrastructure and engineer seamless deployment pipelines.',
   about: {
     heading: 'About Me.',
     text: [
-      'I\'m Krishna, a Full Stack Developer focused on building reliable, scalable and user-centric digital products.',
-      'I enjoy turning ideas into real-world solutions through code.'
+      'I am a DevOps and Cloud Engineering specialist focused on designing automated, reliable systems.',
+      'Currently completing my Computer Science degree at Lovely Professional University, I bridge the gap between software development and infrastructure. My role is to eliminate friction—turning manual deployments into automated, resilient pipelines.'
     ],
     stats: [
-      { label: 'Years of Experience', value: '2+' },
-      { label: 'Projects Completed', value: '15+' },
-      { label: 'Technologies Worked With', value: '10+' }
+      { label: 'Problems Solved', value: '200+' },
+      { label: 'Core Projects', value: '3+' },
+      { label: 'Tools Mastered', value: '15+' }
     ]
   },
   contact: {
@@ -19,8 +19,8 @@ export const profileData = {
     phone: '+91 12345 67890',
     location: 'India',
     socials: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
+      github: 'https://github.com/krishnalatwal',
+      linkedin: 'https://linkedin.com/in/krishnalatwal',
       email: 'mailto:krishna@example.com'
     }
   }
