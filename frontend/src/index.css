@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  --color-primary: var(--color-bg);
+  --color-secondary: var(--color-text);
+  --color-accent: var(--color-accent);
+  --color-muted: var(--color-muted);
+  --color-panel: var(--color-panel);
+  --color-border: var(--color-border);
+}
+
+@layer base {
+  :root {
+    --color-bg: #fdfdfd;
+    --color-text: #1a1a1a;
+    --color-accent: #6b4c9a;
+    --color-muted: #808080;
+    --color-panel: #f5f5f5;
+    --color-border: #e0e0e0;
+  }
+
+  .dark {
+    --color-bg: #0f0f11;
+    --color-text: #e8e8e3;
+    --color-accent: #8b6ebf;
+    --color-muted: #a0a0a0;
+    --color-panel: #1a1a1c;
+    --color-border: #2a2a2c;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
