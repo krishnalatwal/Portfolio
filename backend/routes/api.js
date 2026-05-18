@@ -3,6 +3,8 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import Message from '../models/Message.js'
+
 const router = express.Router()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -40,6 +42,32 @@ router.get('/skills', async (req, res) => {
     res.json(skills)
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve skills data' })
+  }
+})
+
+router.post('/contact', async (req, res) => {
+  const { name, email, message } = req.body
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'All fields (name, email, message) are required.' })
+  }
+
+  // Basic email pattern check
+  const emailRegex = /^\S+@\S+\.\S+$/
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email address format.' })
+  }
+
+  try {
+    const newMessage = await Message.create({ name, email, message })
+    res.status(201).json({ 
+      success: true, 
+      message: 'Transmission received and logged successfully.', 
+      data: newMessage 
+    })
+  } catch (error) {
+    console.error('Error logging transmission to MongoDB:', error)
+    res.status(500).json({ error: 'Failed to process message transmission' })
   }
 })
 
