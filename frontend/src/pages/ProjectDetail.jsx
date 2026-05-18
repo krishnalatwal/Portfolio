@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
-import { projectsData } from '../data/projects'
+import { usePortfolioStore } from '../store/portfolioStore'
 import { Container } from '../components/Container'
 import { MangaPanel } from '../components/MangaPanel'
 
@@ -14,6 +14,7 @@ const GithubIcon = ({ className }) => (
 
 export const ProjectDetail = () => {
   const { slug } = useParams()
+  const projectsData = usePortfolioStore((state) => state.projects)
   const project = projectsData.find(p => p.slug === slug)
 
   if (!project) {

@@ -1,0 +1,27 @@
+{
+  "name": "Krishna.",
+  "title": "CLOUD & DEVOPS ENGINEER",
+  "description": "I architect scalable cloud infrastructure and engineer seamless deployment pipelines.",
+  "about": {
+    "heading": "About Me.",
+    "text": [
+      "I am a DevOps and Cloud Engineering specialist focused on designing automated, reliable systems.",
+      "Currently completing my Computer Science degree at Lovely Professional University, I bridge the gap between software development and infrastructure. My role is to eliminate friction—turning manual deployments into automated, resilient pipelines."
+    ],
+    "stats": [
+      { "label": "Problems Solved", "value": "200+" },
+      { "label": "Core Projects", "value": "3+" },
+      { "label": "Tools Mastered", "value": "15+" }
+    ]
+  },
+  "contact": {
+    "email": "krishna@example.com",
+    "phone": "+91 12345 67890",
+    "location": "India",
+    "socials": {
+      "github": "https://github.com/krishnalatwal",
+      "linkedin": "https://linkedin.com/in/krishnalatwal",
+      "email": "mailto:krishna@example.com"
+    }
+  }
+}

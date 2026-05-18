@@ -1,10 +1,11 @@
 import { Container } from '../components/Container'
 import { ProjectCard } from '../components/ProjectCard'
 import { SectionTitle } from '../components/SectionTitle'
-import { projectsData } from '../data/projects'
+import { usePortfolioStore } from '../store/portfolioStore'
 import { ArrowRight } from 'lucide-react'
 
 export const Projects = () => {
+  const projectsData = usePortfolioStore((state) => state.projects)
   return (
     <section id="projects" className="py-24 md:py-32 relative">
       <Container>

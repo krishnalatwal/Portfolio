@@ -1,10 +1,12 @@
 import { Container } from '../components/Container'
 import { MangaPanel } from '../components/MangaPanel'
 import { SectionTitle } from '../components/SectionTitle'
-import { skillsData } from '../data/skills'
+import { usePortfolioStore } from '../store/portfolioStore'
 import { motion } from 'framer-motion'
+import * as LucideIcons from 'lucide-react'
 
 export const Skills = () => {
+  const skillsData = usePortfolioStore((state) => state.skills)
   return (
     <section id="skills" className="py-24 md:py-32 relative bg-panel/30">
       <Container>
@@ -33,7 +35,10 @@ export const Skills = () => {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="flex flex-col items-center justify-center gap-4 p-8 border border-border bg-bg hover:bg-panel transition-colors duration-300 group"
               >
-                <skill.icon className="w-8 h-8 text-muted group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
+                {(() => {
+                  const Icon = typeof skill.icon === 'string' ? (LucideIcons[skill.icon] || LucideIcons.Code) : (skill.icon || LucideIcons.Code)
+                  return <Icon className="w-8 h-8 text-muted group-hover:text-accent transition-colors duration-300" strokeWidth={1.5} />
+                })()}
                 <span className="font-serif text-sm md:text-base text-center">{skill.name}</span>
               </motion.div>
             ))}

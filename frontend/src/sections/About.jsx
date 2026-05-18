@@ -1,9 +1,10 @@
 import { Container } from '../components/Container'
 import { MangaPanel } from '../components/MangaPanel'
 import { SectionTitle } from '../components/SectionTitle'
-import { profileData } from '../data/profile'
+import { usePortfolioStore } from '../store/portfolioStore'
 
 export const About = () => {
+  const profileData = usePortfolioStore((state) => state.profile)
   return (
     <section id="about" className="py-24 md:py-32 relative">
       <Container>

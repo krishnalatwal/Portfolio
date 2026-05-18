@@ -2,11 +2,12 @@ import { motion } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
 import { Stars } from '@react-three/drei'
 import { Container } from '../components/Container'
-import { profileData } from '../data/profile'
 import { useThemeStore } from '../store/themeStore'
+import { usePortfolioStore } from '../store/portfolioStore'
 
 export const Hero = () => {
   const isDark = useThemeStore((state) => state.isDark)
+  const profileData = usePortfolioStore((state) => state.profile)
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
