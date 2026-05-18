@@ -67,7 +67,7 @@ export const Contact = () => {
         <div className="grid lg:grid-cols-[1fr_1fr] gap-16 items-start">
           <div>
             <SectionTitle 
-              chapter="05" 
+              chapter="06" 
               title="Let's Connect."
               subtitle="Have a project in mind or just want to say hi? I'd love to hear from you."
             />

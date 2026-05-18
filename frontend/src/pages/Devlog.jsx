@@ -56,7 +56,7 @@ export const Devlog = () => {
         {/* Title Header */}
         <div className="mb-16">
           <SectionTitle 
-            chapter="06"
+            chapter="07"
             title="Dev Logs."
             subtitle="Engineering archives, system design field notes, and technical build logs."
           />

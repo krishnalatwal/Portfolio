@@ -48,6 +48,17 @@ h1, h2, h3, h4, h5, h6, .font-serif {
   color: #fff;
 }
 
+/* Global Transitions for Reading Mode Dissolves */
+header, footer {
+  transition: opacity 0.5s ease-in-out !important;
+}
+
+body.reading-mode-active header,
+body.reading-mode-active footer {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Procedural Noise Texture Overlay */
 .noise-overlay {
   position: fixed;

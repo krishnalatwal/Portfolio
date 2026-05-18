@@ -21,11 +21,12 @@ export const Layout = () => {
           <nav className="hidden lg:flex gap-8 xl:gap-12 text-xs md:text-sm uppercase tracking-widest font-light">
             {isHome ? (
               <>
-                <a href="#about" className="hover:text-accent transition-colors">01 About</a>
-                <a href="#skills" className="hover:text-accent transition-colors">02 Skills</a>
-                <a href="#projects" className="hover:text-accent transition-colors">03 Projects</a>
-                <a href="#contact" className="hover:text-accent transition-colors">04 Contact</a>
-                <Link to="/devlog" className="hover:text-accent transition-colors">05 Dev Logs</Link>
+                <a href="#about" className="hover:text-accent transition-colors">02 About</a>
+                <a href="#skills" className="hover:text-accent transition-colors">03 Skills</a>
+                <a href="#projects" className="hover:text-accent transition-colors">04 Projects</a>
+                <a href="#github-activity" className="hover:text-accent transition-colors">05 Activity</a>
+                <a href="#contact" className="hover:text-accent transition-colors">06 Contact</a>
+                <Link to="/devlog" className="hover:text-accent transition-colors">07 Dev Logs</Link>
               </>
             ) : (
               <>

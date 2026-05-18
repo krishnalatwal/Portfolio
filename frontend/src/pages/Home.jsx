@@ -3,6 +3,7 @@ import { Hero } from '../sections/Hero'
 import { About } from '../sections/About'
 import { Skills } from '../sections/Skills'
 import { Projects } from '../sections/Projects'
+import { GithubActivity } from '../sections/GithubActivity'
 import { Contact } from '../sections/Contact'
 
 export const Home = () => {
@@ -16,6 +17,7 @@ export const Home = () => {
       <About />
       <Skills />
       <Projects />
+      <GithubActivity />
       <Contact />
     </motion.div>
   )

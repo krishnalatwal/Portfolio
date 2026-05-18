@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
 import { Container } from '../components/Container'
 import { usePortfolioStore } from '../store/portfolioStore'
 import { renderMdxContent } from '../utils/mdxParser'
-import { ArrowLeft, Calendar, Clock, Share2, Check } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock, Share2, Check, Eye, EyeOff } from 'lucide-react'
 import { trackEvent } from '../utils/telemetry'
 
 export const ArticleDetail = () => {
@@ -13,6 +13,7 @@ export const ArticleDetail = () => {
   const loadJournals = usePortfolioStore((state) => state.loadJournals)
   
   const [copied, setCopied] = useState(false)
+  const [isReadingMode, setIsReadingMode] = useState(false)
 
   useEffect(() => {
     if (journals.length === 0) {
@@ -20,6 +21,16 @@ export const ArticleDetail = () => {
     }
     trackEvent('visit', { path: `/devlog/${slug}` })
   }, [slug, journals.length, loadJournals])
+
+  // Reading Mode body class toggle
+  useEffect(() => {
+    if (isReadingMode) {
+      document.body.classList.add('reading-mode-active')
+    } else {
+      document.body.classList.remove('reading-mode-active')
+    }
+    return () => document.body.classList.remove('reading-mode-active')
+  }, [isReadingMode])
 
   const item = journals.find(j => j.slug === slug)
 
@@ -39,7 +50,6 @@ export const ArticleDetail = () => {
   }
 
   if (!item) {
-    // If journals are loaded but no matching slug is found, redirect to devlog
     if (journals.length > 0) {
       return <Navigate to="/devlog" replace />
     }
@@ -47,16 +57,43 @@ export const ArticleDetail = () => {
   }
 
   return (
-    <div className="py-32 min-h-screen relative bg-bg">
+    <div className={`transition-colors duration-500 py-32 min-h-screen relative bg-bg ${isReadingMode ? 'py-16 bg-bg/95' : ''}`}>
       {/* Dynamic Top Reading Progress Indicator */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-[3px] bg-accent origin-left z-[60]"
         style={{ scaleX }}
       />
 
-      <Container className="max-w-[800px] relative">
+      {/* Floating Reading Mode Toggle */}
+      <button
+        onClick={() => {
+          setIsReadingMode(!isReadingMode)
+          trackEvent('toggle_reading_mode', { active: !isReadingMode, slug })
+        }}
+        className="fixed bottom-8 right-8 z-[70] px-4 py-3 bg-secondary text-primary font-mono text-xs uppercase tracking-widest border border-border hover:border-accent hover:scale-105 transition-all duration-300 shadow-premium flex items-center gap-2.5 select-none"
+      >
+        <div className={`w-2 h-2 rounded-full ${isReadingMode ? 'bg-accent animate-pulse' : 'bg-muted'}`} />
+        {isReadingMode ? (
+          <>
+            <EyeOff className="w-3.5 h-3.5" />
+            Exit Focus
+          </>
+        ) : (
+          <>
+            <Eye className="w-3.5 h-3.5" />
+            Focus Read
+          </>
+        )}
+      </button>
+
+      <Container className={`transition-all duration-500 ease-in-out relative ${isReadingMode ? 'max-w-[880px] pt-12' : 'max-w-[800px]'}`}>
+        
         {/* Navigation & Actions */}
-        <div className="flex items-center justify-between mb-16 select-none">
+        <motion.div 
+          animate={{ opacity: isReadingMode ? 0 : 1, y: isReadingMode ? -15 : 0 }}
+          transition={{ duration: 0.4 }}
+          className={`flex items-center justify-between mb-16 select-none ${isReadingMode ? 'pointer-events-none' : ''}`}
+        >
           <Link 
             to="/devlog" 
             className="inline-flex items-center gap-2 text-muted hover:text-accent transition-colors text-xs uppercase tracking-widest font-mono"
@@ -82,13 +119,12 @@ export const ArticleDetail = () => {
               </>
             )}
           </button>
-        </div>
+        </motion.div>
 
         {/* Article Header block */}
         <motion.header 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ opacity: isReadingMode ? 0.35 : 1 }}
+          transition={{ duration: 0.5 }}
           className="mb-12 border-b border-border/40 pb-12"
         >
           <span className="text-xs uppercase tracking-[0.25em] font-mono text-accent font-semibold mb-4 block">
@@ -128,16 +164,22 @@ export const ArticleDetail = () => {
 
         {/* Dynamic MDX Content Body */}
         <motion.article 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="prose prose-lg dark:prose-invert max-w-none text-secondary leading-relaxed font-light"
+          layout="position"
+          className={`prose prose-lg dark:prose-invert max-w-none text-secondary font-light transition-all duration-500 ${
+            isReadingMode 
+              ? 'leading-loose text-[19px] tracking-wide prose-p:mb-8' 
+              : 'leading-relaxed text-[17px] prose-p:mb-6'
+          }`}
         >
           {renderMdxContent(item.rawContent)}
         </motion.article>
 
         {/* End of Transmission Divider */}
-        <div className="mt-20 pt-10 border-t border-border/30 text-center select-none">
+        <motion.div 
+          animate={{ opacity: isReadingMode ? 0.15 : 1, y: isReadingMode ? 15 : 0 }}
+          transition={{ duration: 0.4 }}
+          className={`mt-20 pt-10 border-t border-border/30 text-center select-none ${isReadingMode ? 'pointer-events-none' : ''}`}
+        >
           <p className="text-[10px] font-mono tracking-[0.3em] text-muted/50 uppercase">
             // END OF TRANSMISSION LOG //
           </p>
@@ -148,7 +190,7 @@ export const ArticleDetail = () => {
             <ArrowLeft className="w-3.5 h-3.5" />
             Return to Archives
           </Link>
-        </div>
+        </motion.div>
       </Container>
     </div>
   )
