@@ -1,6 +1,7 @@
 import { Outlet, useLocation, Link } from 'react-router-dom'
 import { ThemeToggle } from './ThemeToggle'
 import { ScrollProgress } from './ScrollProgress'
+import { siteSettings } from '../data/settings'
 
 export const Layout = () => {
   const location = useLocation()
@@ -21,18 +22,18 @@ export const Layout = () => {
           <nav className="hidden lg:flex gap-8 xl:gap-12 text-xs md:text-sm uppercase tracking-widest font-light">
             {isHome ? (
               <>
-                <a href="#about" className="hover:text-accent transition-colors">02 About</a>
-                <a href="#skills" className="hover:text-accent transition-colors">03 Skills</a>
-                <a href="#projects" className="hover:text-accent transition-colors">04 Projects</a>
-                <a href="#github-activity" className="hover:text-accent transition-colors">05 Activity</a>
-                <a href="#contact" className="hover:text-accent transition-colors">06 Contact</a>
-                <Link to="/devlog" className="hover:text-accent transition-colors">07 Dev Logs</Link>
+                {siteSettings.nav.showAbout && <a href="#about" className="hover:text-accent transition-colors">02 About</a>}
+                {siteSettings.nav.showSkills && <a href="#skills" className="hover:text-accent transition-colors">03 Skills</a>}
+                {siteSettings.nav.showProjects && <a href="#projects" className="hover:text-accent transition-colors">04 Projects</a>}
+                {siteSettings.nav.showActivity && <a href="#github-activity" className="hover:text-accent transition-colors">05 Activity</a>}
+                {siteSettings.nav.showContact && <a href="#contact" className="hover:text-accent transition-colors">06 Contact</a>}
+                {siteSettings.nav.showDevlogs && <Link to="/devlog" className="hover:text-accent transition-colors">07 Dev Logs</Link>}
               </>
             ) : (
               <>
                 <Link to="/" className="hover:text-accent transition-colors">Home</Link>
                 <a href="/#projects" className="hover:text-accent transition-colors">Projects</a>
-                <Link to="/devlog" className={`hover:text-accent transition-colors ${location.pathname.startsWith('/devlog') ? 'font-medium text-accent' : ''}`}>Dev Logs</Link>
+                {siteSettings.nav.showDevlogs && <Link to="/devlog" className={`hover:text-accent transition-colors ${location.pathname.startsWith('/devlog') ? 'font-medium text-accent' : ''}`}>Dev Logs</Link>}
               </>
             )}
           </nav>
@@ -48,7 +49,7 @@ export const Layout = () => {
       </main>
 
       <footer className="py-8 text-center text-muted text-sm tracking-widest uppercase border-t border-border mt-auto">
-        &copy; {new Date().getFullYear()} KRISHNA. ALL RIGHTS RESERVED.
+        &copy; {new Date().getFullYear()} {siteSettings.footer.copyrightName}. ALL RIGHTS RESERVED.
       </footer>
     </div>
   )

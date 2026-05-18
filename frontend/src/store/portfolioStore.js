@@ -3,6 +3,7 @@ import { profileData as localProfile } from '../data/profile'
 import { projectsData as localProjects } from '../data/projects'
 import { skillsData as localSkills } from '../data/skills'
 import { parseMdxFrontmatter } from '../utils/mdxParser'
+import { siteSettings } from '../data/settings'
 
 const API_BASE_URL = 'http://localhost:5000/api'
 
@@ -80,7 +81,8 @@ export const usePortfolioStore = create((set, get) => ({
     const cachedEvents = sessionStorage.getItem('github_events')
     const cachedTime = sessionStorage.getItem('github_cache_time')
     
-    const isCacheValid = cachedTime && (Date.now() - parseInt(cachedTime, 10) < 600000) // 10 minutes cache
+    const cacheMs = (siteSettings.github.cacheMinutes || 10) * 60000
+    const isCacheValid = cachedTime && (Date.now() - parseInt(cachedTime, 10) < cacheMs)
 
     if (cachedRepos && cachedEvents && isCacheValid) {
       set({ 

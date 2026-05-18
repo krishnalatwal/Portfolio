@@ -1,3 +1,15 @@
+/**
+ * PROJECTS CONFIGURATION
+ * ──────────────────────
+ * Add new projects by appending an object to this array.
+ * The UI (Projects.jsx, ProjectDetail.jsx) auto-renders from this data.
+ *
+ * Required fields:  id, slug, title, subtitle, description, image, tags
+ * Optional fields:  liveUrl, githubUrl, details.*
+ *
+ * details.gallery  → array of image paths shown in the cinematic staggered grid
+ * liveUrl / githubUrl → use "#" to hide the link button gracefully
+ */
 export const projectsData = [
   {
     id: 1,

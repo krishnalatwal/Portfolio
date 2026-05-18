@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Container } from '../components/Container'
 import { SectionTitle } from '../components/SectionTitle'
 import { usePortfolioStore } from '../store/portfolioStore'
+import { siteSettings } from '../data/settings'
 import { GitPullRequest, Star, GitFork, ExternalLink, RefreshCw } from 'lucide-react'
 import { trackEvent } from '../utils/telemetry'
 
@@ -82,7 +83,7 @@ export const GithubActivity = () => {
               </h3>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                {repos.slice(0, 4).map((repo) => (
+                {repos.slice(0, siteSettings.github.reposToShow).map((repo) => (
                   <motion.div 
                     key={repo.id}
                     variants={itemVariants}

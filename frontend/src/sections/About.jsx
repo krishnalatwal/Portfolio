@@ -2,9 +2,12 @@ import { Container } from '../components/Container'
 import { MangaPanel } from '../components/MangaPanel'
 import { SectionTitle } from '../components/SectionTitle'
 import { usePortfolioStore } from '../store/portfolioStore'
+import { siteSettings } from '../data/settings'
 
 export const About = () => {
   const profileData = usePortfolioStore((state) => state.profile)
+  const { panels, subtitle } = siteSettings.about
+
   return (
     <section id="about" className="py-24 md:py-32 relative">
       <Container>
@@ -13,7 +16,7 @@ export const About = () => {
             <SectionTitle 
               chapter="02" 
               title={profileData.about.heading}
-              subtitle="My role is to turn ideas into scalable digital solutions."
+              subtitle={profileData.about.subtitle || subtitle}
             />
             
             <div className="flex flex-col gap-6 text-lg text-muted font-light leading-relaxed max-w-md">
@@ -32,33 +35,17 @@ export const About = () => {
             </div>
           </div>
           
-          {/* Manga Inspired Layout */}
+          {/* Manga Panel Grid — layout controlled by settings.js */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 grid-flow-row-dense">
-            <MangaPanel 
-              className="md:col-span-2 aspect-[16/9] md:aspect-[21/9]"
-              image="/manga/about-city.jpg"
-              text="EVERY PROJECT BEGINS WITH A PROBLEM."
-              delay={0.1}
-            />
-            
-            <MangaPanel 
-              className="aspect-square md:aspect-[4/5]"
-              image="/manga/about-focus.jpg"
-              delay={0.2}
-            />
-            
-            <div className="flex flex-col gap-4">
+            {panels.map((panel, i) => (
               <MangaPanel 
-                className="flex-1 aspect-[4/3]"
-                text="SIMPLE. PRACTICAL. IMPACTFUL."
-                delay={0.3}
+                key={i}
+                className={`${panel.span === 2 ? 'md:col-span-2' : ''} ${panel.aspect}`}
+                image={panel.image}
+                text={panel.text}
+                delay={0.1 * (i + 1)}
               />
-              <MangaPanel 
-                className="flex-[1.5] aspect-[16/9]"
-                image="/manga/about-code.jpg"
-                delay={0.4}
-              />
-            </div>
+            ))}
           </div>
         </div>
       </Container>
