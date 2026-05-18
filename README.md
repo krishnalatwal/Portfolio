@@ -1,4 +1,4 @@
-# ANTIGRAVITY — Engineering Portfolio Platform
+# Portfolio Platform (Manga styled)
 
 > A cinematic, full-stack developer portfolio and technical journal built by **Krishna Latwal** — Cloud & DevOps Engineer.
 
@@ -12,7 +12,7 @@
 
 ## What Is This?
 
-ANTIGRAVITY is not a template. It is a bespoke, production-grade engineering platform designed around three principles:
+This is not a template. It is a bespoke, production-grade engineering platform designed around three principles:
 
 - **Cinematic Aesthetics** — print-manga editorial layouts, atmospheric Three.js starfields, paper grain texture overlays, smooth Framer Motion transitions
 - **Engineering Depth** — async telemetry pipeline, resilient API fallback architecture, MDX devlog system, GitHub Activity feed, CI/CD validation
@@ -266,7 +266,7 @@ Every `push` or `pull_request` to `main` triggers `.github/workflows/ci.yml`:
 ## Deployment
 
 ### Frontend — Vercel *(recommended)*
-1. Connect `krishnalatwal/Portfolio` repo to [Vercel](https://vercel.com)
+1. Connect `Portfolio` repo to [Vercel](https://vercel.com)
 2. Set **Root Directory** to `frontend`
 3. Build command: `npm run build` · Output: `dist`
 4. Deploy — every push to `main` auto-deploys
