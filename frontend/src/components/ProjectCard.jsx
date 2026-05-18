@@ -1,21 +1,48 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 export const ProjectCard = ({ project }) => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e) => {
+    const el = e.currentTarget
+    const rect = el.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    const rX = -(y / (rect.height / 2)) * 6
+    const rY = (x / (rect.width / 2)) * 6
+    setTilt({ x: rX, y: rY })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 })
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="group relative flex flex-col gap-6"
     >
-      <Link to={`/projects/${project.slug}`} className="relative aspect-[4/3] w-full overflow-hidden bg-panel block">
+      <Link 
+        to={`/projects/${project.slug}`} 
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: 'transform 0.15s ease-out'
+        }}
+        className="relative aspect-[4/3] w-full overflow-hidden bg-panel block border-2 border-border shadow-premium hover:shadow-2xl transition-all duration-300"
+      >
         {project.image ? (
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy"
             className="w-full h-full object-cover grayscale opacity-80 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
           />
         ) : (
@@ -23,7 +50,6 @@ export const ProjectCard = ({ project }) => {
             Visual Data Missing
           </div>
         )}
-        <div className="absolute inset-0 border border-border pointer-events-none transition-colors duration-300 group-hover:border-accent/50" />
       </Link>
 
       <div className="flex flex-col gap-2">

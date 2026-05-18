@@ -1,12 +1,18 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { ThemeToggle } from './ThemeToggle'
+import { ScrollProgress } from './ScrollProgress'
 
 export const Layout = () => {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
   return (
-    <div className="relative w-full min-h-screen selection:bg-accent selection:text-white">
+    <div className="relative w-full min-h-screen selection:bg-accent selection:text-white bg-primary text-secondary transition-colors duration-300">
+      {/* Dynamic Scroll Progress Bar */}
+      <ScrollProgress />
+
+      {/* Global Grain/Noise Overlay */}
+      <div className="noise-overlay" />
       {/* Fixed Navigation / Header */}
       <header className={`fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 lg:px-24 xl:px-32 mix-blend-difference text-white pointer-events-none transition-all duration-300`}>
         <div className="flex justify-between items-center max-w-[1440px] mx-auto w-full pointer-events-auto">

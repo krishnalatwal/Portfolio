@@ -12,11 +12,11 @@ export const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas>
+        <Canvas dpr={[1, 1.5]} gl={{ powerPreference: "high-performance", antialias: false }}>
           <Stars 
             radius={100} 
             depth={50} 
-            count={isDark ? 5000 : 1000} 
+            count={isDark ? 3000 : 800} 
             factor={4} 
             saturation={0} 
             fade 
@@ -77,6 +77,7 @@ export const Hero = () => {
             <img 
               src="/manga/hero-coding.jpg" 
               alt="Cinematic Coding"
+              loading="lazy"
               className="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
             />
             

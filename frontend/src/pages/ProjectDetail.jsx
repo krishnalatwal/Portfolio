@@ -21,7 +21,12 @@ export const ProjectDetail = () => {
   }
 
   return (
-    <div className="pt-32 pb-24 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="pt-32 pb-24 min-h-screen"
+    >
       <Container>
         {/* Header */}
         <div className="mb-16">
@@ -113,6 +118,6 @@ export const ProjectDetail = () => {
           </Link>
         </div>
       </Container>
-    </div>
+    </motion.div>
   )
 }
