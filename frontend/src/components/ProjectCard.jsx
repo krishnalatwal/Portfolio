@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export const ProjectCard = ({ project }) => {
   return (
@@ -10,7 +11,7 @@ export const ProjectCard = ({ project }) => {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex flex-col gap-6"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-panel">
+      <Link to={`/projects/${project.slug}`} className="relative aspect-[4/3] w-full overflow-hidden bg-panel block">
         {project.image ? (
           <img
             src={project.image}
@@ -23,18 +24,21 @@ export const ProjectCard = ({ project }) => {
           </div>
         )}
         <div className="absolute inset-0 border border-border pointer-events-none transition-colors duration-300 group-hover:border-accent/50" />
-      </div>
+      </Link>
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-2xl font-serif">{project.title}</h3>
+          <Link to={`/projects/${project.slug}`}>
+            <h3 className="text-2xl font-serif hover:text-accent transition-colors">{project.title}</h3>
+          </Link>
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noreferrer"
             className="opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+            title="Live URL"
           >
-            <ArrowUpRight className="w-5 h-5" />
+            <ArrowUpRight className="w-5 h-5 hover:text-accent" />
           </a>
         </div>
         <p className="text-sm text-muted">{project.description}</p>
