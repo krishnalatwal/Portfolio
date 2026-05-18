@@ -17,10 +17,10 @@ export const projectsData = [
     title: "KrishiNetra",
     subtitle: "AI-Powered Crop Diagnostics",
     description: "Built a real-time AI inference backend serving an Android application. Bridged MobileNetV2 with a scalable FastAPI architecture to deliver immediate crop disease diagnostics to users.",
-    image: "/manga/project2.jpg",
+    image: "/manga/project1.jpg",
     tags: ["TensorFlow", "FastAPI", "Python", "Android", "AWS"],
     liveUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/krishnalatwal/KrishiNetra",
     details: {
       overview: "Farmers often struggle to identify crop diseases early enough to prevent significant yield loss. KrishiNetra was conceived to bring advanced diagnostic tools directly to the field via a mobile device. It uses deep learning to identify diseases from a simple smartphone photo.",
       techStack: "Leverages a custom MobileNetV2 TensorFlow classification model quantized into TFLite format for rapid server-side inference. The backend is engineered on FastAPI (Python) using asynchronous worker pools, and the client is a native Android application built with clean architecture pattern.",
@@ -33,31 +33,11 @@ export const projectsData = [
   },
   {
     id: 2,
-    slug: "jarvishub",
-    title: "JarvisHub",
-    subtitle: "IoT Developer Automation Center",
-    description: "Architected a centralized dashboard for developer environment home-lab monitoring. Integrates WebSockets, real-time telemetry, and containerized process tracking into a unified control interface.",
-    image: "/manga/project1.jpg",
-    tags: ["Node.js", "WebSockets", "Docker", "React", "Linux"],
-    liveUrl: "#",
-    githubUrl: "#",
-    details: {
-      overview: "Managing multiple localized developer instances, database servers, and smart automation pipelines can easily lead to console fatigue. JarvisHub consolidates telemetry metrics, service statuses, and webhook task execution into a premium, unified Command Center.",
-      techStack: "Engineered with a Node.js + Express backend using Socket.io to pipe high-frequency CPU/Memory metrics. The client is a React interface displaying dynamic telemetry, and the agent mounts direct Docker API Unix sockets for container inspections.",
-      architecture: "A background system daemon collects OS resource metrics and container health states. Every 500ms, the system relays delta updates over persistent WebSocket channels to the central React frontend, allowing developers to trigger actions instantly.",
-      implementation: "Built custom script runners that capture server-side log tails and send them over WebSockets, as well as a container restart utility that calls the Docker API directly from Express backend routes.",
-      challenges: "Managing stream backpressure and thread blocking when pushing concurrent resource-heavy terminal tail logs to the client. Resolved by debouncing chart refreshes and utilizing Node worker threads to isolate log parsing off the main event loop.",
-      outcomes: "Consolidated 8 separate server command-lines into a single visual hub. Reduced dev environment troubleshooting time by 50% and locked down resource leaks instantly.",
-      gallery: ["/manga/about-city.jpg", "/manga/about-code.jpg", "/manga/contact-city.jpg"]
-    }
-  },
-  {
-    id: 3,
     slug: "clipboard-sync",
     title: "Clipboard Sync System",
     subtitle: "Secure Multi-Device Sync Engine",
     description: "Designed and built an end-to-end encrypted multi-device clipboard synchronizer. Leverages WebSockets, secure key exchanges, and localized background agents to deliver instantaneous clipboard syncing.",
-    image: "/manga/project3.jpg",
+    image: "/manga/project2.jpg",
     tags: ["Go", "WebSockets", "Redis", "AES-256", "Docker"],
     liveUrl: "#",
     githubUrl: "#",
@@ -70,5 +50,76 @@ export const projectsData = [
       outcomes: "Synchronized text snippets across paired client devices in under 80ms globally, maintaining zero server-side exposure of plaintext data.",
       gallery: ["/manga/skills-tools.jpg", "/manga/about-focus.jpg", "/manga/about-code.jpg"]
     }
+  },
+  {
+  id: 3,
+  slug: "class-reminder",
+  title: "Class Reminder",
+  subtitle: "Smart Attendance & Schedule Assistant",
+  description: "Built an Android-based class reminder application to help students manage schedules, attendance timings, and daily academic routines efficiently.",
+  image: "/manga/project3.jpg",
+  tags: ["Android", "Java", "Firebase", "Notifications"],
+  liveUrl: "#",
+  githubUrl: "https://github.com/krishnalatwal/class-reminder.git",
+  details: {
+    overview: "Students often miss classes or lose track of schedules during busy academic routines. Class Reminder was created to provide timely reminders and simplify daily timetable management.",
+    techStack: "Built using Android Studio with Java, integrated local notifications and lightweight persistent storage for schedule management.",
+    architecture: "The application stores user schedules locally and triggers background reminders based on configured class timings.",
+    implementation: "Implemented reminder scheduling, notification handling, and timetable management screens with a clean mobile-first UI.",
+    challenges: "Managing accurate notification triggering across different Android battery optimization settings.",
+    outcomes: "Helped streamline daily class tracking and improved schedule consistency for students.",
+    gallery: [
+      "/manga/about-code.jpg",
+      "/manga/about-focus.jpg"
+    ]
   }
+},
+
+{
+  id: 4,
+  slug: "trackbits",
+  title: "TrackBits",
+  subtitle: "Personal Expense & Activity Tracker",
+  description: "Developed a lightweight tracking application focused on organizing daily activities, expenses, and productivity records in a clean interface.",
+  image: "/manga/project4.jpg",
+  tags: ["Android", "Java", "SQLite", "UI/UX"],
+  liveUrl: "#",
+  githubUrl: "https://github.com/krishnalatwal/TrackBits.git",
+  details: {
+    overview: "TrackBits was designed to simplify personal tracking by allowing users to log and monitor important daily records from a single application.",
+    techStack: "Built using Android and SQLite with a focus on responsive UI and smooth local data handling.",
+    architecture: "Uses local database storage to maintain fast offline-first tracking performance without dependency on external services.",
+    implementation: "Implemented categorized tracking modules, persistent storage, and optimized list rendering for smoother performance.",
+    challenges: "Designing a flexible structure capable of handling multiple categories of tracked data efficiently.",
+    outcomes: "Created a lightweight and fast productivity-focused tracking solution for everyday use.",
+    gallery: [
+      "/manga/skills-tools.jpg",
+      "/manga/about-code.jpg"
+    ]
+  }
+},
+
+{
+  id: 5,
+  slug: "splitexpense",
+  title: "SplitExpense",
+  subtitle: "Collaborative Expense Splitting App",
+  description: "Built a group expense management application that simplifies bill splitting, contribution tracking, and shared expense calculations among friends and teams.",
+  image: "/manga/project5.jpg",
+  tags: ["Android", "Java", "Firebase", "Realtime Database"],
+  liveUrl: "#",
+  githubUrl: "https://github.com/krishnalatwal/SplitExpense.git",
+  details: {
+    overview: "Managing shared expenses in trips, hostels, and friend groups often becomes confusing. SplitExpense helps users track shared payments and calculate balances easily.",
+    techStack: "Developed with Android Studio using Firebase Realtime Database for synchronized group expense management.",
+    architecture: "The system maintains group-wise expense records and dynamically calculates balances between members.",
+    implementation: "Built shared expense modules, contribution logging, and automated balance calculation features.",
+    challenges: "Handling accurate balance calculations across multiple users and avoiding duplicated transaction entries.",
+    outcomes: "Simplified group expense management and reduced manual calculation effort during shared activities.",
+    gallery: [
+      "/manga/contact-city.jpg",
+      "/manga/about-focus.jpg"
+    ]
+  }
+}
 ]

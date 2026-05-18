@@ -13,7 +13,7 @@ export const Hero = () => {
   const { hero } = siteSettings
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
       {siteSettings.features.threeJsBackground && (
         <div className="absolute inset-0 z-0">

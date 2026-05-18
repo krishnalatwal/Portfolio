@@ -12,8 +12,7 @@ export const Layout = () => {
       {/* Dynamic Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* Global Grain/Noise Overlay */}
-      <div className="noise-overlay" />
+
       {/* Fixed Navigation / Header */}
       <header className={`fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 lg:px-24 xl:px-32 mix-blend-difference text-white pointer-events-none transition-all duration-300`}>
         <div className="flex justify-between items-center max-w-[1440px] mx-auto w-full pointer-events-auto">
@@ -22,6 +21,7 @@ export const Layout = () => {
           <nav className="hidden lg:flex gap-8 xl:gap-12 text-xs md:text-sm uppercase tracking-widest font-light">
             {isHome ? (
               <>
+                {siteSettings.nav.showAbout && <a href="#hero" className="hover:text-accent transition-colors">01 Intro</a>}
                 {siteSettings.nav.showAbout && <a href="#about" className="hover:text-accent transition-colors">02 About</a>}
                 {siteSettings.nav.showSkills && <a href="#skills" className="hover:text-accent transition-colors">03 Skills</a>}
                 {siteSettings.nav.showProjects && <a href="#projects" className="hover:text-accent transition-colors">04 Projects</a>}

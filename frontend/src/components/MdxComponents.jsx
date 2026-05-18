@@ -66,7 +66,7 @@ export const CodeWindow = ({ code, language }) => {
 export const MangaPanel = ({ image, text, className }) => {
   return (
     <div className={`relative border border-border bg-panel overflow-hidden group my-12 aspect-[16/9] ${className || ''}`}>
-      <div className="noise-overlay" />
+
       {image ? (
         <img 
           src={image} 

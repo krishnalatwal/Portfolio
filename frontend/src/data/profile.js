@@ -8,28 +8,28 @@
 export const profileData = {
   name: 'Krishna.',
   fullName: 'Krishna Latwal',
-  title: 'CLOUD & DEVOPS ENGINEER',
-  description: 'I architect scalable cloud infrastructure and engineer seamless deployment pipelines.',
-  resumeUrl: '#',              // Set to your actual resume PDF URL when ready
-  openToWork: true,            // Toggles "Open to Work" badge on Hero if implemented
+  title: 'CLOUD, DEVOPS & ANDROID DEVELOPER',
+  description: 'I enjoy building real-world projects, automating workflows, and turning ideas into practical digital products through code, cloud, and creative problem solving.',
+  resumeUrl: '#',
+  openToWork: true,
 
   about: {
     heading: 'About Me.',
-    subtitle: 'My role is to turn ideas into scalable digital solutions.',
+    subtitle: 'I build projects that solve problems and teach me something new every time.',
     text: [
-      'I am a DevOps and Cloud Engineering specialist focused on designing automated, reliable systems.',
-      'Currently completing my Computer Science degree at Lovely Professional University, I bridge the gap between software development and infrastructure. My role is to eliminate friction—turning manual deployments into automated, resilient pipelines.'
+      'I am a Computer Science student who enjoys vibecoding, experimenting with technology, and learning by building hands-on projects.',
+      'My interests revolve around Cloud, DevOps, Android development, MERN stack, and automation. Whether it’s creating full-stack applications, deploying scalable systems, or building productivity tools, I enjoy solving problems through practical development and continuous learning.'
     ],
     stats: [
       { label: 'Problems Solved', value: '200+' },
-      { label: 'Core Projects', value: '3+' },
-      { label: 'Tools Mastered', value: '15+' }
+      { label: 'Projects Built', value: '10+' },
+      { label: 'Technologies Explored', value: '15+' }
     ]
   },
 
   contact: {
-    email: 'krishnalatwal7560@gmail.com',
-    phone: '+91 98765 43210',
+    email: 'krishnalatwal.official@gmail.com',
+    phone: '+91 9650923218',
     location: 'Punjab, India',
   }
 }

@@ -89,7 +89,7 @@ export const GithubActivity = () => {
                     variants={itemVariants}
                     className="group border border-border bg-panel/10 hover:border-accent transition-all duration-500 p-6 flex flex-col justify-between h-[200px] relative overflow-hidden"
                   >
-                    <div className="noise-overlay" />
+
                     
                     {/* Header */}
                     <div className="flex flex-col gap-2">
@@ -144,8 +144,6 @@ export const GithubActivity = () => {
                 variants={itemVariants}
                 className="border border-border bg-panel shadow-premium p-6 font-mono text-xs overflow-hidden relative"
               >
-                <div className="noise-overlay" />
-                
                 {/* Visual Header */}
                 <div className="flex items-center gap-2 pb-4 border-b border-border/30 mb-6 select-none">
                   <GitPullRequest className="w-4 h-4 text-accent" />

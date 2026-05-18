@@ -116,8 +116,6 @@ export const Devlog = () => {
                   layout
                   className="group flex flex-col border border-border bg-panel/10 hover:border-accent transition-all duration-500 overflow-hidden relative"
                 >
-                  <div className="noise-overlay" />
-                  
                   {/* Article Card Frame */}
                   <Link 
                     to={`/devlog/${item.slug}`}

@@ -23,7 +23,7 @@ export const socialsData = [
   {
     id: 'instagram',
     label: 'Instagram',
-    url: 'https://instagram.com/krishnalatwal',
+    url: 'https://instagram.com/heyykrissh',
     icon: 'instagram',
     ariaLabel: 'Follow on Instagram'
   },
