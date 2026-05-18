@@ -21,6 +21,7 @@ export const profileData = {
     socials: {
       github: 'https://github.com/krishnalatwal',
       linkedin: 'https://linkedin.com/in/krishnalatwal',
+      instagram: 'https://instagram.com/krishnalatwal',
       email: 'mailto:krishna@example.com'
     }
   }
